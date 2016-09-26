@@ -17,8 +17,10 @@
     "url": "https://github.com/JohnDHamm/to-do-app_node-angular/issues"
   },
   "homepage": "https://github.com/JohnDHamm/to-do-app_node-angular#readme",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "bower": "^1.7.9"
   }
 }
