@@ -1,12 +1,14 @@
 <h1>Here's where the list be...</h1>
 
 <ul>
-	<li ng-repeat="item in items">{{item.task}}</li>
+	<li ng-repeat="item in items">{{item.task}}
+		<input type="checkbox" name="deleteCheckbox" ng-click="RemoveItem(item._id)">
+	</li>
 </ul>
 
 <hr />
 
 <form ng-submit="postNewTask()">
-	<input type="text" ng-model="task" placeholder="enter new task here" />
-	<input type="submit" >
+	<input type="text" ng-model="task" placeholder="enter new task here">
+	<input type="submit">
 </form>

@@ -38,6 +38,15 @@ app.post('/api/items', (req, res, err) => {
 	}
 )
 
+app.delete('/api/items/:id', (req, res, err) => {
+	// const id = req.params.id;
+	console.log("id to remove: ", id);
+	Item
+		.remove({_id: id})
+		.then(() => res.status(204))
+		.catch(err)
+})
+
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URL, () =>
 	app.listen(PORT, () => console.log(`listening on port: ${PORT}`))

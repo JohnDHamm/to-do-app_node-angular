@@ -28,12 +28,26 @@ angular
 
 			$http
 				.post('/api/items', newTask)
-				.then(() => $scope.items.push(newTask))
+				// .then(() => $scope.items.push(newTask))
+				.then(reloadPage())
 				.catch(console.error)
 		}
 
-		$http
-			.get('/api/items') //route
-			.then(({data: {items}}) => $scope.items = items)
+		$scope.RemoveItem = (id) => {
+			// console.log("item to remove: ", id);
+			$http
+				.delete(`/api/items/${id}`)
+				.then(reloadPage())
+		}
+
+		function reloadPage() {
+			$http
+				.get('/api/items') //route
+				.then(({data: {items}}) => $scope.items = items)
+			$scope.task = "";
+		}
+
+		reloadPage();
+
 	})
 
