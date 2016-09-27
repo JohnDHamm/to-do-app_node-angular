@@ -20,4 +20,10 @@ angular
 				$scope.title = title
 			)
 	})
+	.controller('ToDoCtrl', function($scope, $http) {
+
+		$http
+			.get('/api/items') //route
+			.then(({data: {items}}) => $scope.items = items)
+	})
 
