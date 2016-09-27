@@ -21,6 +21,16 @@ angular
 			)
 	})
 	.controller('ToDoCtrl', function($scope, $http) {
+		$scope.postNewTask = () => {
+			const newTask = {
+				task: $scope.task
+			}
+
+			$http
+				.post('/api/items', newTask)
+				.then(() => $scope.items.push(newTask))
+				.catch(console.error)
+		}
 
 		$http
 			.get('/api/items') //route

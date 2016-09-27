@@ -3,3 +3,10 @@
 <ul>
 	<li ng-repeat="item in items">{{item.task}}</li>
 </ul>
+
+<hr />
+
+<form ng-submit="postNewTask()">
+	<input type="text" ng-model="task" placeholder="enter new task here" />
+	<input type="submit" >
+</form>
