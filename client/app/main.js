@@ -12,6 +12,10 @@ angular
 				controller: 'ToDoCtrl',
 				templateUrl: 'partials/toDo.html'
 			})
+			.when('/editTask/:taskId', {
+				controller: 'EditTaskCtrl',
+				templateUrl: 'partials/editTask.html'
+			})
 		)
 	.controller('MainCtrl', function($scope, $http) {
 		$http
@@ -40,6 +44,15 @@ angular
 				.then(reloadPage())
 		}
 
+		$scope.editTask = (id) => {
+			console.log("item id to edit: ", id);
+			// $http
+			// 	.get(`/api/editTask/${id}`)
+			// 	.then((text) => console.log("original text: ", text))
+
+
+		}
+
 		function reloadPage() {
 			$http
 				.get('/api/items') //route
@@ -49,5 +62,26 @@ angular
 
 		reloadPage();
 
+	})
+	.controller('EditTaskCtrl', function($scope, $http, $routeParams) {
+		const editId = $routeParams.taskId;
+		console.log("editId from routeParams: ", editId);
+
+		$http
+			.get(`/api/taskDescription/${editId}`)
+			.then((data) => {
+				const origText = data.data[0].task;
+				console.log("origText: ", origText);
+				$scope.editedTask = origText;
+			})
+
+		$scope.postEditedTask= () => {
+			const editedTask = {
+				task: $scope.editedTask
+			}
+
+			// $http
+			// 	.patch()
+		}
 	})
 

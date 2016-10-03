@@ -47,6 +47,15 @@ app.delete('/api/items/:id', (req, res, err) => {
 		.catch(err)
 })
 
+app.get('/api/taskDescription/:id', (req, res, err) => {
+	const id = req.params.id;
+	console.log("id to edit from api call req.body: ", id);
+	Item
+		.find({_id: id})
+		.then(task => res.json(task))
+		.catch(err)
+})
+
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URL, () =>
 	app.listen(PORT, () => console.log(`listening on port: ${PORT}`))

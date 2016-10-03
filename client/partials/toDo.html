@@ -3,6 +3,9 @@
 <ul>
 	<li ng-repeat="item in items">{{item.task}}
 		<input type="checkbox" name="deleteCheckbox" ng-click="RemoveItem(item._id)">
+		<a href="#/editTask/{{item._id}}">
+			<button ng-click="editTask(item._id)">edit</button>
+		</a>
 	</li>
 </ul>
 
