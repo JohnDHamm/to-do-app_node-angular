@@ -49,10 +49,19 @@ app.delete('/api/items/:id', (req, res, err) => {
 
 app.get('/api/taskDescription/:id', (req, res, err) => {
 	const id = req.params.id;
-	console.log("id to edit from api call req.body: ", id);
+	// console.log("id to edit from api call req.body: ", id);
 	Item
 		.find({_id: id})
 		.then(task => res.json(task))
+		.catch(err)
+})
+
+app.put('/api/items/:id', (req, res, err) => {
+	const id = req.params.id;
+	// console.log("edited task: ", req.body);
+	Item
+		.findOneAndUpdate({_id: id}, req.body, { upsert: true })
+		.then(data => res.status(200).json(data))
 		.catch(err)
 })
 

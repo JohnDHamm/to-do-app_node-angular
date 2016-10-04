@@ -24,7 +24,7 @@ angular
 				$scope.title = title
 			)
 	})
-	.controller('ToDoCtrl', function($scope, $http) {
+	.controller('ToDoCtrl', function($scope, $http, $location) {
 		$scope.postNewTask = () => {
 			const newTask = {
 				task: $scope.task
@@ -45,12 +45,8 @@ angular
 		}
 
 		$scope.editTask = (id) => {
-			console.log("item id to edit: ", id);
-			// $http
-			// 	.get(`/api/editTask/${id}`)
-			// 	.then((text) => console.log("original text: ", text))
-
-
+			// console.log("item id to edit: ", id);
+			$location.path(`/editTask/${id}`);
 		}
 
 		function reloadPage() {
@@ -63,9 +59,9 @@ angular
 		reloadPage();
 
 	})
-	.controller('EditTaskCtrl', function($scope, $http, $routeParams) {
+	.controller('EditTaskCtrl', function($scope, $http, $routeParams, $location) {
 		const editId = $routeParams.taskId;
-		console.log("editId from routeParams: ", editId);
+		// console.log("editId from routeParams: ", editId);
 
 		$http
 			.get(`/api/taskDescription/${editId}`)
@@ -75,13 +71,16 @@ angular
 				$scope.editedTask = origText;
 			})
 
-		$scope.postEditedTask= () => {
+		$scope.postEditedTask = () => {
 			const editedTask = {
 				task: $scope.editedTask
 			}
 
-			// $http
-			// 	.patch()
+			$http
+				.put(`/api/items/${editId}`, editedTask)
+				.then(() => $location.path('/toDo'))
+				.catch(console.error)
 		}
+
 	})
 
